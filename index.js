@@ -13,7 +13,7 @@ server.get("/home",(req,res)=>{
 })
 server.post("/events",(req,res)=>{
     const{poster,name,description,date,location,category,price}=req.body;
-    fs.readFile("./db.json",(err,data)=>{
+    fs.readFile("db.json",(err,data)=>{
         if(err){
             res.send({message:"somwthing went wrong"})
  return
@@ -22,7 +22,7 @@ server.post("/events",(req,res)=>{
        var last_id=data.events[data.events.length-1].id;
        console.log(last_id)
        data.events.push({"id":last_id+1,poster,name,description,date,location,category,price})
-       const writedata=fs.writeFile("./db.json",JSON.stringify(data),(err,result)=>{
+       const writedata=fs.writeFile("db.json",JSON.stringify(data),(err,result)=>{
         if(err){
             res.send(err)
         }
